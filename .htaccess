@@ -1,0 +1,41 @@
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+#on input to the DB, we'll transofrm paths into dash-separated lists
+#which become the permalink to the html content
+#client code will still use path format, so we transform the request
+#to match the permalink
+#http://stackoverflow.com/questions/29023298/replace-all-forward-slashes-with-dashes
+
+#RewriteBase /src/ehr/
+
+#RewriteRule ^([^/]+)/([^/]+)(?:\.html|/)?$ $1-$2 [NE,L,R=302]
+
+#RewriteRule ^(.*)\.html$ $1 [R=301,L]
+
+#RewriteRule ^([^/]+)/(.+)$ $1-$2
+
+</IfModule>
+
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /src/ehr/
+RewriteRule ^(.*)\.html$ $1 [R=301,L]
+</IfModule>
+
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /src/ehr/
+
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /src/ehr/index.php [L]
+
+</IfModule>
+
+# END WordPress
+
