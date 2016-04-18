@@ -1,6 +1,6 @@
 {
-"prescriptions" : ["doctor"],
-"user-management" : ["tecnician","manager"],
-"welcome-actions" : ["public"],
-"feed" : ["doctor"]
+"prescriptions.html" : ["doctor","tecnician"],
+"user-management.html" : ["tecnician","manager"],
+"welcome-actions.html" : ["public"],
+"feed.html" : ["doctor"]
 }

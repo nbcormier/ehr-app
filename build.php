@@ -24,11 +24,18 @@ function htaccess($args){
 $match = '"**/*.html,**/authorization.json"';
 $ignore = '"wordpress/**","lib/**","node_modules/**"';
 $matches = shell_exec ('node glob ' . $match  . ' -i ' . $ignore );
-
-//htaccess($parsed);
+echo $matches;
+htaccess($parsed);
 if(!empty($matches)){
+	
 	//decode fails on single quote values
-	print_r(json_decode(str_replace("'",'"',$matches)););
+	//we are going to use matches from glob as URI's, node alwyas 
+	//uses forwards slashes so we replace those with valid separators
+	$dc = array_map(function($v){
+		return str_replace('/', DIRECTORY_SEPARATOR, $v);
+	},json_decode(str_replace("'",'"',$matches)));
+	
+	//print_r($dc);
 	
 	//get path of authorization file
 	//array_values resets matches indexes to 0
@@ -41,7 +48,31 @@ if(!empty($matches)){
 	if(count($auth_path) > 0){
 		$authorizations = file_get_contents($auth_path[0]);
 		$authorizations = json_decode($authorizations, true);
-		print_r($authorizations);
+		
+		foreach($dc as $rel){
+			
+			//skip authorization file
+			if(strpos($rel,'authorization.json') !== false)
+				continue;
+			
+			$filename = basename($rel);
+			$ext = '.' . pathinfo($rel, PATHINFO_EXTENSION );
+			 if(isset($authorizations[$filename])){
+				 //can't pass stringified auth array so make it comma-sep list
+				 //reassembled to code in push.php using explode
+				 $auths = implode(',',$authorizations[$filename]);
+
+				 $cmd = sprintf('php wordpress/lib/push.php "%s" "%s" < "%s"', str_replace($ext,'',$rel), $auths,getCwd().DIRECTORY_SEPARATOR.$rel);
+					$out = shell_exec($cmd);
+					echo $cmd . PHP_EOL . PHP_EOL;
+					echo $out . PHP_EOL . PHP_EOL;
+			 }else{
+				 echo $filename . ' skipped: no authorization entry.' . PHP_EOL;
+			 }
+			
+		}
+		
+		//print_r($authorizations);
 	}else{
 		die('ERROR: Failed to find autorization file');
 	}
