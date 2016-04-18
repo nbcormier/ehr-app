@@ -1,0 +1,6 @@
+{
+"prescriptions" : ["doctor"],
+"user-management" : ["tecnician","manager"],
+"welcome-actions" : ["public"],
+"feed" : ["doctor"]
+}
