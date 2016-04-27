@@ -17,6 +17,7 @@
         vm.patients = [];
         vm.patientSearch = true;
         vm.title = 'Dashboard';
+        vm.now = moment();
 
         activate();
 

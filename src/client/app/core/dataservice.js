@@ -22,7 +22,7 @@
         function getMessageCount() {
             return $q.when(72);
         }
-        
+
         function createPatient(patient) {
             return $http.post('/api/patients/create', patient)
                 .then(success)
@@ -79,8 +79,8 @@
             }
         }
 
-        function addOfficeQueue(patient) {
-            return $http.post('/api/office/queue/add', patient)
+        function addOfficeQueue(visit) {
+            return $http.post('/api/office/queue/add', visit)
                 .then(success)
                 .catch(fail);
 

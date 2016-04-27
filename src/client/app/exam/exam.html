@@ -12,13 +12,15 @@
                                         <th>First Name</th>
                                         <th>Last Name</th>
                                         <th>Age</th>
+                                        <th>When</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="p in vm.officeQueue track by $index">
-                                        <td>{{p.firstName}}</td>
-                                        <td>{{p.lastName}}</td>
-                                        <td>{{p.age}}</td>
+                                    <tr ng-repeat="visit in vm.officeQueue">
+                                        <td>{{visit.patient.firstName}}</td>
+                                        <td>{{visit.patient.lastName}}</td>
+                                        <td>{{visit.patient.age}}</td>
+                                        <td am-time-ago="visit.timestamp"></td>
                                     </tr>
                                 </tbody>
                             </table>

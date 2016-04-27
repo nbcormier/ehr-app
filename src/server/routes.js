@@ -40,8 +40,8 @@ function getOfficeQueue(req, res, next) {
 }
 
 function addOfficeQueue(req, res, next) {
-    var patient = req.body;
-    data.officeQueue.push(patient);
+    var visit = req.body;
+    data.officeQueue.push(visit);
     res.status(200).end();
 }
 
