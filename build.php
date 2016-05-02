@@ -61,8 +61,8 @@ if(!empty($matches)){
 				 //can't pass stringified auth array so make it comma-sep list
 				 //reassembled to code in push.php using explode
 				 $auths = implode(',',$authorizations[$filename]);
-
-				 $cmd = sprintf('php wordpress/lib/push.php "%s" "%s" < "%s"', str_replace($ext,'',$rel), $auths,getCwd().DIRECTORY_SEPARATOR.$rel);
+				//TODO: batch these execs. we load WP deps on each call - should only happen once. 
+				$cmd = sprintf('php wordpress/lib/push.php "%s" "%s" < "%s"', str_replace($ext,'',$rel), $auths, getCwd().DIRECTORY_SEPARATOR.$rel);
 					$out = shell_exec($cmd);
 					echo $cmd . PHP_EOL . PHP_EOL;
 					echo $out . PHP_EOL . PHP_EOL;
