@@ -1,5 +1,9 @@
 <?php
-
+/*
+this should be called by gulp build and contents from build should
+be copied out to root to avoid issues with Angular not bootstrapping 
+b/c base tag 
+*/
 
 require_once('lib/Autoloader.php');
 use Webmozart\Glob\Glob;
@@ -22,7 +26,7 @@ function htaccess($args){
 //$paths = Glob::glob($glob); 
 
 $match = '"**/*.html,**/authorization.json"';
-$ignore = '"wordpress/**","lib/**","node_modules/**"';
+$ignore = '"wordpress/**","lib/**","node_modules/**","src/**","report/**","bower_components/**","my-src/**"';
 $matches = shell_exec ('node glob ' . $match  . ' -i ' . $ignore );
 echo $matches;
 htaccess($parsed);
@@ -61,8 +65,10 @@ if(!empty($matches)){
 				 //can't pass stringified auth array so make it comma-sep list
 				 //reassembled to code in push.php using explode
 				 $auths = implode(',',$authorizations[$filename]);
+				 
+				 $sansBuildDir = str_replace('build' . DIRECTORY_SEPARATOR ,'',str_replace($ext,'',$rel));
 				//TODO: batch these execs. we load WP deps on each call - should only happen once. 
-				$cmd = sprintf('php wordpress/lib/push.php "%s" "%s" < "%s"', str_replace($ext,'',$rel), $auths, getCwd().DIRECTORY_SEPARATOR.$rel);
+				$cmd = sprintf('php wordpress/lib/push.php "%s" "%s" < "%s"', $sansBuildDir, $auths, getCwd().DIRECTORY_SEPARATOR.$rel);
 					$out = shell_exec($cmd);
 					echo $cmd . PHP_EOL . PHP_EOL;
 					echo $out . PHP_EOL . PHP_EOL;

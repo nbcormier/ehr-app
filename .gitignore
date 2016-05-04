@@ -1,11 +1,16 @@
-<<<<<<< HEAD
-node_modules/
-=======
+
 # Dependency directory
 # https://docs.npmjs.com/misc/faq#should-i-check-my-node-modules-folder-into-git
 node_modules/
 bower_components/
-
+my-src/
+build/
+fonts/
+images/
+js/
+styles/
+school/
 # other
 .tmp
->>>>>>> 397bdff9d696912e875d1473697c951d82e46d7b
+
+

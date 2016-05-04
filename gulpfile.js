@@ -202,11 +202,17 @@ gulp.task('build', ['optimize', 'images', 'fonts'], function() {
   del(config.temp);
   log(msg);
   notify(msg);
+
+  gulp
+    .src([config.html, '!' + config.index])
+    .pipe(gulp.dest(config.build));
   
   return gulp
-          .src([config.html, '!' + config.index])
-          .pipe(gulp.dest(config.build));
+    .src([config.build + '**', '!' + config.build + 'app/'])
+    .pipe(gulp.dest('./'));  
 });
+
+
 
 /**
  * Optimize all files, move to a build folder,
@@ -231,17 +237,17 @@ gulp.task('optimize', ['inject'], function() {
     .pipe(assets) // Gather all assets from the html with useref
     // Get the css
     .pipe(cssFilter)
-    .pipe($.minifyCss())
+    .pipe($.if(!args.n, $.minifyCss()))
     .pipe(cssFilter.restore())
     // Get the custom javascript
     .pipe(jsAppFilter)
     .pipe($.ngAnnotate({ add: true }))
-    .pipe($.uglify())
+    .pipe($.if(!args.n, $.uglify()))
     .pipe(getHeader())
     .pipe(jsAppFilter.restore())
     // Get the vendor javascript
     .pipe(jslibFilter)
-    .pipe($.uglify()) // another option is to override wiredep to use min files
+    .pipe($.if(!args.n, $.uglify())) // another option is to override wiredep to use min files
     .pipe(jslibFilter.restore())
     // Take inventory of the file names for future rev numbers
     .pipe($.rev())
@@ -299,7 +305,11 @@ gulp.task('clean-code', function(done) {
   var files = [].concat(
     config.temp + '**/*.js',
     config.build + 'js/**/*.js',
-    config.build + '**/*.html'
+    config.build + '**/*.html',
+    'fonts/',
+    'images/',
+    'js/',
+    'styles/'
   );
   clean(files, done);
 });

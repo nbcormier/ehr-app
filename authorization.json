@@ -1,6 +1,14 @@
 {
-"prescriptions.html" : ["doctor","tecnician"],
-"user-management.html" : ["tecnician","manager"],
-"welcome-actions.html" : ["public"],
-"feed.html" : ["doctor"]
+"index.html" : ["all"],
+"admin.html" : ["manager","tecnician"],
+"dashboard.html" : ["all"],
+"exam.html" : ["doctor"],
+"ht-top-nav.html" : ["all"],
+"shell.html" : ["all"],
+"sidebar.html" : ["all"],
+"create.html" : ["all"],
+"details.html" : ["all"],
+"patients.html" : ["all"],
+"widget-header.html" : ["all"],
+"404.html" : ["public"]
 }

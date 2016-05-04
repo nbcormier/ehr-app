@@ -99,3 +99,18 @@ pi now autologin by enabling sudo systemctl enable autologin@.service
 created /etc/systemd/system/docker-container.service and enabled it
 which makes it a dependency of multi-user.taget and requires after docker.service
 it runs /bin/bash /home/pi/start-server.sh
+
+#Authorization issues
+
+USer roles must have "read" and "read private content" capabilities.
+The restrict content by role plugin needs two meta field to work:
+"_mkdo_rcbr_roles" := valid roles in the system
+"_mkdo_rcbr_restrict_sub_content" := {content, all}
+
+LAck of capabilites was cauing wp() to return 404 because wp_query->query
+was returning {} due to failing user_has_capability()
+
+Currently, we're using 404 page to tell users they're unautorizaed and the
+page url is stored in the database as 
+UPDATE `ehr_wordpress`.`wp_options` SET `option_value` = 'app/core/404.html' WHERE `wp_options`.`option_id` = 173;
+

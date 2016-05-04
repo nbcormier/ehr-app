@@ -16,7 +16,7 @@
             {
                 state: 'dashboard',
                 config: {
-                    url: '/',
+                    url: '/index',
                     
                     templateUrl: 'app/dashboard/dashboard.html',
                     controller: 'DashboardController',
