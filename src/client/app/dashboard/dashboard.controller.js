@@ -14,9 +14,6 @@
         vm.feed = [];
         
         vm.title = 'Dashboard';
-<<<<<<< Updated upstream
-        //vm.now = moment();
-=======
 
         vm.queue = {
             welcomed: {
@@ -88,7 +85,6 @@
                 }
             }
         }
->>>>>>> Stashed changes
 
         activate();
 

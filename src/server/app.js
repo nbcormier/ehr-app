@@ -25,41 +25,15 @@ console.log('PORT=' + port);
 console.log('NODE_ENV=' + environment);
 
 switch (environment) {
-<<<<<<< Updated upstream
-  case 'build':
-    console.log('** BUILD **');
-    app.use(express.static('./build/'));
-    // Any invalid calls for templateUrls are under app/* and should return 404
-    /*
-    app.use('/app/*', function(req, res, next) {
-      four0four.send404(req, res);
-    });
-    */
-    // Any deep link calls should return index.html
-    app.use('/*', express.static('./build/index.html'));
-    break;
-  default:
-    console.log('** DEV **');
-    app.use(express.static('./src/client/'));
-    app.use(express.static('./'));
-    app.use(express.static('./tmp'));
-    // Any invalid calls for templateUrls are under app/* and should return 404
-    /*
-    app.use('/app/*', function(req, res, next) {
-      four0four.send404(req, res);
-    });
-    */
-    // Any deep link calls should return index.html
-    app.use('/*', express.static('./src/client/index.html'));
-    break;
-=======
     case 'build':
         console.log('** BUILD **');
         app.use(express.static('./build/'));
         // Any invalid calls for templateUrls are under app/* and should return 404
-        app.use('/app/*', function (req, res, next) {
-            four0four.send404(req, res);
+        /*
+        app.use('/app/*', function(req, res, next) {
+          four0four.send404(req, res);
         });
+        */
         // Any deep link calls should return index.html
         app.use('/*', express.static('./build/index.html'));
         break;
@@ -69,13 +43,14 @@ switch (environment) {
         app.use(express.static('./'));
         app.use(express.static('./tmp'));
         // Any invalid calls for templateUrls are under app/* and should return 404
-        app.use('/app/*', function (req, res, next) {
-            four0four.send404(req, res);
+        /*
+        app.use('/app/*', function(req, res, next) {
+          four0four.send404(req, res);
         });
+        */
         // Any deep link calls should return index.html
         app.use('/*', express.static('./src/client/index.html'));
         break;
->>>>>>> Stashed changes
 }
 
 app.listen(port, function () {
