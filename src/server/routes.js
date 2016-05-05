@@ -10,10 +10,8 @@ var data = require('./data');
 router.get('/patients', getPatients);
 router.post('/patients/create', createPatient);
 router.get('/office/queue', getOfficeQueue);
-router.post('/office/queue/update', updateQueue);
+router.post('/office/queue/add', addOfficeQueue);
 router.get('/patient/:id', getPatient);
-router.get('/office/feed', getOfficeFeed);
-router.post('/office/feed/update', updateFeed);
 router.get('/*', four0four.notFoundMiddleware);
 
 module.exports = router;
@@ -41,38 +39,9 @@ function getOfficeQueue(req, res, next) {
     res.status(200).send(data.officeQueue);
 }
 
-function getOfficeFeed(req, res, next) {
-    res.status(200).send(data.officeFeed);
-}
-
-function updateQueue(req, res, next) {
+function addOfficeQueue(req, res, next) {
     var visit = req.body;
-    // remove visit from queue
-    for (var key in data.officeQueue) {
-        var found = false;
-        // array of visits in state
-        var state = data.officeQueue[key];
-        for (var j = 0; j < state.length; j++) {
-            var v = state[j];
-            if (v.patient.id === visit.patient.id) {
-                state.splice(j, 1);
-                found = true;
-                break;
-            }
-        }
-        if (found) {
-            data.officeQueue[key] = state;
-            break;
-        }
-    }
-    // add visit to the correct queue
-    data.officeQueue[visit.status].push(visit);
-    res.status(200).end();
-}
-
-function updateFeed(req, res, next) {
-    var event = req.body;
-    data.officeFeed.push(event);
+    data.officeQueue.push(visit);
     res.status(200).end();
 }
 

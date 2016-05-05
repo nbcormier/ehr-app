@@ -13,10 +13,8 @@
             getPatient: getPatient,
             getPatients: getPatients,
             getMessageCount: getMessageCount,
-            getQueue: getQueue,
-            updateQueue: updateQueue,
-            updateFeed: updateFeed,
-            getFeed: getFeed
+            getOfficeQueue: getOfficeQueue,
+            addOfficeQueue: addOfficeQueue
         };
 
         return service;
@@ -67,7 +65,7 @@
             }
         }
 
-        function getQueue() {
+        function getOfficeQueue() {
             return $http.get('/api/office/queue')
                 .then(success)
                 .catch(fail);
@@ -81,8 +79,8 @@
             }
         }
 
-        function updateQueue(visit) {
-            return $http.post('/api/office/queue/update', visit)
+        function addOfficeQueue(visit) {
+            return $http.post('/api/office/queue/add', visit)
                 .then(success)
                 .catch(fail);
 
@@ -91,37 +89,8 @@
             }
 
             function fail(e) {
-                return exception.catcher('XHR Failed for updateQueue')(e);
+                return exception.catcher('XHR Failed for addOfficeQueue')(e);
             }
         }
-
-        function getFeed() {
-            return $http.get('/api/office/feed')
-                .then(success)
-                .catch(fail);
-
-            function success(response) {
-                return response.data;
-            }
-
-            function fail(e) {
-                return exception.catcher('XHR Failed for getFeed')(e);
-            }
-        }
-
-        function updateFeed(event) {
-            return $http.post('/api/office/feed/update', event)
-                .then(success)
-                .catch(fail);
-
-            function success(response) {
-                return response.data;
-            }
-
-            function fail(e) {
-                return exception.catcher('XHR Failed for updateFeed')(e);
-            }
-        }
-
     }
 })();

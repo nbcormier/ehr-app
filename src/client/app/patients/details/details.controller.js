@@ -32,5 +32,15 @@
                 return vm.patient;
             });
         }
+
+        vm.addToQueue = function (patient) {
+            var visit = {};
+            visit.timestamp = moment();
+            visit.patient = patient;
+
+            dataservice.addOfficeQueue(visit).then(function (data) {
+                logger.info('Added ' + patient.firstName + ' to office queue');
+            });
+        };
     }
 })();

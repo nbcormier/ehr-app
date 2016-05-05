@@ -2,89 +2,32 @@
     <section class="matter">
         <div class="container">
             <div class="row">
-                <div class="col-sm-3">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Welcomed Patients
-                            <span class="badge pull-right">{{vm.queue.welcomed.data.length}}</span>
-                        </div>
-
-                        <!-- List group -->
-                        <ul ng-sortable="vm.queue.welcomed.config" class="list-group queue-state-list">
-                            <li data-ng-repeat="visit in vm.queue.welcomed.data" class="list-group-item">{{visit.patient.firstName}} {{visit.patient.lastName}}
-                                <span am-time-ago="visit.timeStamp"></span>
-                            </li>
-                        </ul>
-                        <div class="panel-footer text-center">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <input type="text" placeholder="Welcome patient" data-ng-model="vm.selected" uib-typeahead="patient as patient.firstName + ' ' + patient.lastName for patient in vm.findPatient($viewValue)" typeahead-on-select="vm.onSelect($item, $model, $label, $event)" class="form-control">
-                                    <div class="input-group-addon">+</div>
-                                </div>
+                <div class="col-md-12">
+                    <ul class="today-datas">
+                        <li class="blightblue" ui-sref="patients">
+                            <div class="pull-left"><i class="fa fa-plus"></i></div>
+                            <div class="datas-text pull-right">
+                                <span class="bold">Welcome patient
                             </div>
-                        </div>
-                    </div>
+                            <div class="clearfix"></div>
+                        </li>
 
-                </div>
-                <div class="col-sm-3">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Pre-Exam Patients
-                            <span class="badge pull-right">{{vm.queue.preExam.data.length}}</span>
-                        </div>
-
-                        <!-- List group -->
-                        <ul ng-sortable="vm.queue.preExam.config" class="list-group queue-state-list">
-                            <li data-ng-repeat="visit in vm.queue.preExam.data" class="list-group-item">{{visit.patient.firstName}} {{visit.patient.lastName}} <span am-time-ago="visit.timeStamp"></span></li>
-                        </ul>
-                    </div>
-
-                </div>
-                <div class="col-sm-3">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Exam Patients
-                            <span class="badge pull-right">{{vm.queue.exam.data.length}}</span>
-                        </div>
-
-                        <!-- List group -->
-                        <ul ng-sortable="vm.queue.exam.config" class="list-group queue-state-list">
-                            <li data-ng-repeat="visit in vm.queue.exam.data" class="list-group-item">{{visit.patient.firstName}} {{visit.patient.lastName}} <span am-time-ago="visit.timeStamp"></span></li>
-                        </ul>
-                    </div>
-
-                </div>
-                <div class="col-sm-3">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Completed Patients
-                            <span class="badge pull-right">{{vm.queue.complete.data.length}}</span>
-                        </div>
-
-                        <!-- List group -->
-                        <ul ng-sortable="vm.queue.complete.config" class="list-group queue-state-list">
-                            <li data-ng-repeat="visit in vm.queue.complete.data" class="list-group-item">{{visit.patient.firstName}} {{visit.patient.lastName}} <span am-time-ago="visit.timeStamp"></span></li>
-                        </ul>
-                    </div>
-
+                    </ul>
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Office Events
-                        </div>
-
-                        <!-- List group -->
-                        <ul class="list-group">
-                            <li data-ng-repeat="event in vm.feed | orderBy:'-timeStamp' | limitTo:10" class="list-group-item">
-                                {{event.text}}
-                                <span class="pull-right">
-                                    by {{event.creator}}
-                                    <strong am-time-ago="event.timeStamp"></strong>
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="col-md-6">
+                    <div class="widget wgreen">
+                        <div ht-widget-header title="{{vm.news.title}}" allow-collapse="true"></div>
+                        <div class="widget-content text-center text-info">
+                            <div>{{vm.now}}</div>
+                            </div>
+                            <div class="widget-foot">
+                                <div class="clearfix"></div>
+                            </div>
                 </div>
             </div>
+        </div>
         </div>
     </section>
 </section>
