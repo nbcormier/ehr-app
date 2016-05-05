@@ -2,7 +2,5 @@
     "directory": "bower_components",
     "scripts": {
         "postinstall": "gulp wiredep"
-    },
-    "proxy": "http://naproxy.gm.com:80",
-    "https-proxy": "http://naproxy.gm.com:80"
+    }
 }
