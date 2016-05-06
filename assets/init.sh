@@ -1,5 +1,4 @@
 #!/bin/bash
-/usr/sbin/apachectl stop
-/usr/sbin/apachectl start
+bash /data/init2.sh
 /usr/bin/php-fpm
 /usr/bin/mysqld_safe

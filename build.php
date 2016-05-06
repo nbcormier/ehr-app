@@ -50,8 +50,19 @@ if(!empty($matches)){
 		));
 
 	if(count($auth_path) > 0){
-		$authorizations = file_get_contents($auth_path[0]);
-		$authorizations = json_decode($authorizations, true);
+		$authorizationsObj = file_get_contents($auth_path[0]);
+		$authorizationsObj = json_decode($authorizationsObj, true);
+		if(!isset($authorizationsObj['authorizations'])){
+			die('ERROR: Malformed authorization file > missing \'authorizations\'.');
+		}
+		$authorizations = $authorizationsObj['authorizations'];
+		$unatorizedFile = $authorizationsObj['unauthorized_file'];
+		
+		$cmd = 'php wordpress/lib/wp-api.php "update_option" "mkdo_rcbr_default_redirect" "'.$unatorizedFile.'"';
+		
+		$out = shell_exec($cmd);
+		echo $cmd . PHP_EOL . PHP_EOL;
+		echo $out . PHP_EOL . PHP_EOL;
 		
 		foreach($dc as $rel){
 			

@@ -201,7 +201,7 @@ gulp.task('build', ['optimize', 'images', 'fonts'], function() {
   };
   del(config.temp);
   log(msg);
-  notify(msg);
+  //notify(msg);
 
   gulp
     .src([config.html, '!' + config.index])

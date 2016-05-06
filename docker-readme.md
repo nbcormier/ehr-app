@@ -91,7 +91,7 @@ sudo groupadd ftpgroup
 sudo useradd ftpuser -g ftpgroup -s /sbin/nologin -d /dev/null
 sudo mkdir /home/pi/FTP
 sudo chown -R ftpuser:ftpgroup /home/pi/FTP
-#password is "raspberry"
+#upload/raspberry
 
 >5/2/16
 pi now autologin by enabling sudo systemctl enable autologin@.service
@@ -114,3 +114,21 @@ Currently, we're using 404 page to tell users they're unautorizaed and the
 page url is stored in the database as 
 UPDATE `ehr_wordpress`.`wp_options` SET `option_value` = 'app/core/404.html' WHERE `wp_options`.`option_id` = 173;
 
+#setting up container, first doesn't work
+docker cp FTP/index.php d6b0fff4268f:/var/www/localhost/htdocs/index.php 
+docker cp FTP/wordpress d6b0fff4268f:/var/www/localhost/htdocs
+
+exported DB from phpmyadmin on host, accessed phpmyadmin on guest an imported from there
+
+I'm going to have to hardcode the pi's ip address in wordpress as site and home variables. 
+I don't like this at all.
+
+Solution :
+http://stackoverflow.com/questions/21336126/linux-bash-script-to-extract-ip-address
+
+grab ip address using above command and stuff result in
+
+If you don't want to hack the database directly, use this code in your wp-config.php:
+
+define('WP_HOME','http://example.com');
+define('WP_SITEURL','http://example.com');

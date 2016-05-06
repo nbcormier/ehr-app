@@ -1,14 +1,20 @@
 {
-"index.html" : ["all"],
-"admin.html" : ["manager","tecnician"],
-"dashboard.html" : ["all"],
-"exam.html" : ["doctor"],
-"ht-top-nav.html" : ["all"],
-"shell.html" : ["all"],
-"sidebar.html" : ["all"],
-"create.html" : ["all"],
-"details.html" : ["all"],
-"patients.html" : ["all"],
-"widget-header.html" : ["all"],
-"404.html" : ["public"]
+
+"authorizations" : 
+	{
+	"index.html" : ["all"],
+	"admin.html" : ["manager","tecnician"],
+	"dashboard.html" : ["all"],
+	"exam.html" : ["doctor"],
+	"ht-top-nav.html" : ["all"],
+	"shell.html" : ["all"],
+	"sidebar.html" : ["all"],
+	"create.html" : ["all"],
+	"details.html" : ["all"],
+	"patients.html" : ["all"],
+	"widget-header.html" : ["all"],
+	"404.html" : ["public"]
+	},
+	
+"unauthorized_file" : "app/core/404.html"
 }
