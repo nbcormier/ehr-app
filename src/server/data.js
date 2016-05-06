@@ -1,9 +1,19 @@
 module.exports = {
     patients: getPatients(),
-    officeQueue: getOfficeQueue()
+    officeQueue: getOfficeQueue(),
+    officeFeed: getOfficeFeed()
 };
 
 function getOfficeQueue() {
+    return {
+        'welcomed': [],
+        'preExam': [],
+        'exam': [],
+        'complete': []
+    };
+}
+
+function getOfficeFeed() {
     return [];
 }
 

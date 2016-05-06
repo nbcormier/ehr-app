@@ -12,5 +12,6 @@ styles/
 school/
 # other
 .tmp
-
+wordpress/
+.bowerrc
 
