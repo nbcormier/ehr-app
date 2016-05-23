@@ -13,5 +13,6 @@ school/
 # other
 .tmp
 wordpress/
+report/
 .bowerrc
 
